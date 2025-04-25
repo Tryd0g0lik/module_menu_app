@@ -13,4 +13,5 @@ ignore-path=
     manage.py,
     menu_app\\apps.py,
     menu_app\\models.py,
+    menu_app\\migrations,
 # Максимальная глубина наследования

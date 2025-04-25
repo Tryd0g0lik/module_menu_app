@@ -14,7 +14,7 @@ exclude =
     venv/,
     tests/,
     main.py,
-    migrations/,
+    menu_app/migrations,
     archive/,
     *.md,
     */settings

@@ -38,4 +38,4 @@ repos:
         files: \.py$
         language_version: "3.10"
         name: isort (python)
-    exclude: ^venv/, dotenv_.py, manage.py, **/settings.py
+    exclude: ^venv/, dotenv_.py, manage.py, **/settings.py, menu_app/migrations

@@ -20,21 +20,21 @@ a '<a href="<your_refer>">'.
     """
 
     links = models.CharField(
-        unique=True,
+        unique=False,
         max_length=100,
         help_text=_(
             "'/here/is/the/your/refer/' after \
-the 3 before and equals 100 symbols"
+the 1 before and equals 100 symbols"
         ),
         validators=[
             MaxLengthValidator(
                 limit_value=100, message=_("Max length (of path) 100 symbols")
             ),
             MinLengthValidator(
-                limit_value=3, message=_("Min length (of path) 3 symbols")
+                limit_value=1, message=_("Min length (of path) 1 symbols")
             ),
             RegexValidator(
-                regex=r"^(?!.*  )[a-z][\w\-_\d]{1,98}\/$[^\S\W \/]?",
+                regex=r"(\/||^(?!.*  )[a-z][\w\-_\d]{1,9}\/$[^\S\W ])",
                 message=_("The path has the invalid format"),
             ),
         ],
@@ -42,7 +42,7 @@ the 3 before and equals 100 symbols"
     )
 
     text = models.CharField(
-        unique=True,
+        unique=False,
         max_length=50,
         help_text=_("The tiel (or name) of your reference"),
         verbose_name="Title",
@@ -54,8 +54,7 @@ the 3 before and equals 100 symbols"
                 limit_value=3, message=_("Min length (of title) 3 symbols")
             ),
             RegexValidator(
-                regex=r"^(?!.*  )\/*[a-zA-Zа-яА-ЯёЁ][\w \-_\dа-яА-ЯёЁ]{1,48}\
-[a-zA-Zа-яА-ЯёЁ]$[^\S\W \\]?",
+                regex=r"^(?!.*  )[a-zA-Zа-яА-ЯёЁ][\w \-_\dа-яА-ЯёЁ]{1,48}[a-zA-Zа-яА-ЯёЁ]$[^\S\W \\]?",
                 message=_("The title not have correct format."),
             ),
         ],
@@ -83,11 +82,13 @@ class PageModel(BaseLinkModel):
     ABOUT = "about/index.html"
     CONTACTS = "contacts/index.html"
     NOTPAGE = "404/index.html"
+    PROFILE = "profile/index.html"
 
     PAGE_TEMPLATES = [
         (MAIN, "Главная"),
         (ABOUT, "О нас"),
         (CONTACTS, "Контакты"),
+        (PROFILE, "Профиль"),
         (NOTPAGE, "404"),
     ]
 
@@ -125,7 +126,7 @@ class levelMenuModel(models.TextChoices):
     BOTTOM = "BOTTOM", _("Нижний")
 
 
-class MenuModel(BaseLinkModel):
+class MenuModel(models.Model):
     """
     Menu for navigation
     :links: str is reference of the itself page.
@@ -134,10 +135,9 @@ class MenuModel(BaseLinkModel):
     :template The choice of the template for the page
     """
 
-    # links = models.ForeignKey(
+    # page = models.ManyToManyField(
     #     PageModel,
-    #     on_delete=models.CASCADE,
-    #     help_text=_("The path to the menu page"),
+    #     help_text=_("The path to the page's menu"),
     # ),
     level = models.CharField(
         default=levelMenuModel.TOP,
