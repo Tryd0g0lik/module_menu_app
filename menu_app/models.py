@@ -27,12 +27,6 @@ a '<a href="<your_refer>">'.
 the 3 before and equals 100 symbols"
         ),
         validators=[
-            # Запретить ссылки на внешние файлы
-            lambda value: not value.startswith("http"),
-            # Запретить ссылки на файлы из директории static
-            lambda value: not value.startswith("/static/"),
-            # Запретить ссылки на файлы из директории media
-            lambda value: not value.startswith("/media/"),
             MaxLengthValidator(
                 limit_value=100, message=_("Max length (of path) 100 symbols")
             ),
@@ -48,13 +42,13 @@ the 3 before and equals 100 symbols"
     )
 
     text = models.CharField(
-        гтшйгу=True,
+        unique=True,
         max_length=50,
         help_text=_("The tiel (or name) of your reference"),
         verbose_name="Title",
         validators=[
             MaxLengthValidator(
-                limit_valuse=50, message=_("Max length (of title) 50 symbols")
+                limit_value=50, message=_("Max length (of title) 50 symbols")
             ),
             MinLengthValidator(
                 limit_value=3, message=_("Min length (of title) 3 symbols")
@@ -98,7 +92,7 @@ class PageModel(BaseLinkModel):
     ]
 
     menu_list = models.ManyToManyField(
-        "MenuMode",
+        "MenuModel",
         related_name="pages_menu",
         verbose_name=_("Choose Menu"),
         help_text=_("The Menu that you wont to add to your page"),
@@ -113,7 +107,7 @@ the public page it means that True"
     )
     template = models.CharField(
         default=NOTPAGE,
-        choicse=PAGE_TEMPLATES,
+        choices=PAGE_TEMPLATES,
         verbose_name=_("Choose the page's template"),
     )
 
