@@ -16,8 +16,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+
+from menu_app.views import pageVeiws
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("/", pageVeiws, name="home"),
+    path("about/", pageVeiws, name="about"),
+    path("contact/", pageVeiws, name="contact"),
+    path("profile/", pageVeiws, name="profile"),
+    re_path(r"[\w\d]+", pageVeiws, name="404"),
 ]

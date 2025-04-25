@@ -124,6 +124,7 @@ class levelMenuModel(models.TextChoices):
     TOP = "TOP", _("Верхний")
     SIDE = "SIDE", _("Боковой")
     BOTTOM = "BOTTOM", _("Нижний")
+    PLUG = "PLUG", _("Заглушка")
 
 
 class MenuModel(models.Model):
