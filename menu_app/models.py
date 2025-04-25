@@ -77,7 +77,7 @@ the 3 before and equals 100 symbols"
 
 
 class PageModel(BaseLinkModel):
-    """ "
+    """
     One page
     :links: str is reference of the itself page.
     :text: str is title..
@@ -123,6 +123,40 @@ the public page it means that True"
     class Meta:
         verbose_name = "Page"
         verbose_name_plural = "Pages"
+
+
+class levelMenuModel(models.TextChoices):
+    TOP = "TOP", _("Верхний")
+    SIDE = "SIDE", _("Боковой")
+    BOTTOM = "BOTTOM", _("Нижний")
+
+
+class MenuModel(BaseLinkModel):
+    """
+    Menu for navigation
+    :links: str is reference of the itself page.
+    :text: str is title..
+    :menu_list is menu list for publication to the page.
+    :template The choice of the template for the page
+    """
+
+    # links = models.ForeignKey(
+    #     PageModel,
+    #     on_delete=models.CASCADE,
+    #     help_text=_("The path to the menu page"),
+    # ),
+    level = models.CharField(
+        default=levelMenuModel.TOP,
+        choices=levelMenuModel.choices,
+        verbose_name=_("Level manu"),
+    )
+
+    def __str__(self):
+        return "%s" % (self.level)
+
+    class Meta:
+        verbose_name = _("Level of menu")
+        verbose_name_plural = _("Levels of menu")
 
 
 class CustomUser(AbstractUser):
