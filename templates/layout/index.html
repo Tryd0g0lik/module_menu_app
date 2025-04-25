@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load menu_tags %}
+{% load bootstrap4 %}
+{% load static %}
+
+<html lang = "en">
+<head>
+  <meta charset = "UTF-8">
+  <meta name="viewpost" content="width-device-width, initial-scale=1,
+   shrink-to-fit-no">
+  <title>{% block title %}{{context.texts}}{% endblock title %} - Module-manu</title>
+  {% bootstrap_css %}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'module_menu/styles/style.css' %}">
+<!--  { % bootstrap_javascript jquery='slim' % }-->
+  {% block contribute %}{% endblock contribute %}
+</head>
+<body class="container_fluid">
+  <header>
+    {% block header %}
+      <h1 classe="display-1 text-center">Module-menu</h1>
+    {% endblock header %}
+    {% block content %}
+     <h2>{{context.texts}}</h2>
+    {% endblock content %}
+    {% block headerContribute %}{% endblock headerContribute %}
+  </header>
+  <main>
+    <div class="row">
+      <div class="nav-item">
+        <ul class="col nav justify-content-end border">
+          {% for reference_list in references %}
+            {% for reference  in reference_list %}
+              {% if reference.name_menu == "Top" %}
+                <li class="nav-item">
+                  <a href="/{{reference.links.links_id.links.links}}" class="nav-link" >
+                    {{ reference.links.links_id.texts }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+        </ul>
+        {% block mainRowContribute %}{% endblock mainRowContribute %}
+      </div>
+       <section class="body">
+         {% block sectionBody %}{% endblock sectionBody %}
+       </section>
+    </div>
+  </main>
+  <footer>
+
+    <div class="row">
+      {% draw_menu 'Главное' %}
+    </div>
+  </footer>
+</body>
+</html>
+   <!--  li class="nav-item dropdown">
+              <li class="nav-item">
+                <a href="/" class="dropdown" -->
+                <!-- a href="{ % url 'accounts:profile' % }" class="nav-link
+                dropdown-toggle" tada-togle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false" -->
+                  <!-- Профиль
+                </a>
+                <div class="dropdown-memu">
+                  <a href="/" class="dropdown" -->
+                  <!-- a class="dropdown-item"
+                   href="{ % url 'accounts:profile' % }" -->
+                    <!-- Мои объявления
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a class="dropdown-item"
+                  href="{ % url 'accounts:profile_change' % }" -->
+                    <!-- Изменить личные данные
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a href="{ % url 'accounts:password_change' % }"
+                   class="dropdown-item" -->
+                    <!-- Изменить пароль
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a href="{ % url 'accounts:profile_delete' % }"
+                   class="dropdown-item" -->
+                    <!-- Удалить
+                  </a>
+                  <a href="/" class="dropdown" -->
+                <!-- a class="dropdown-item"
+                href="{ % url 'accounts:logout' % }" -->
+                    <!-- Выход
+                  </a>
+                </div>
+              </li>
+            </li -->
