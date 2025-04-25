@@ -76,6 +76,55 @@ the 3 before and equals 100 symbols"
         return f"Link: {self.links} | Title: {self.text}"
 
 
+class PageModel(BaseLinkModel):
+    """ "
+    One page
+    :links: str is reference of the itself page.
+    :text: str is title..
+    :menu_list is menu list for publication to the page.
+    :template The choice of the template for the page
+    """
+
+    MAIN = "index.html"
+    ABOUT = "about/index.html"
+    CONTACTS = "contacts/index.html"
+    NOTPAGE = "404/index.html"
+
+    PAGE_TEMPLATES = [
+        (MAIN, "Главная"),
+        (ABOUT, "О нас"),
+        (CONTACTS, "Контакты"),
+        (NOTPAGE, "404"),
+    ]
+
+    menu_list = models.ManyToManyField(
+        "MenuMode",
+        related_name="pages_menu",
+        verbose_name=_("Choose Menu"),
+        help_text=_("The Menu that you wont to add to your page"),
+    )
+    active = models.BooleanField(
+        default=False,
+        verbose_name=_("Activate"),
+        help_text=_(
+            "Default is False (not activated), if you want \
+the public page it means that True"
+        ),
+    )
+    template = models.CharField(
+        default=NOTPAGE,
+        choicse=PAGE_TEMPLATES,
+        verbose_name=_("Choose the page's template"),
+    )
+
+    def __str__(self):
+        return "%s" % self.text
+
+    class Meta:
+        verbose_name = "Page"
+        verbose_name_plural = "Pages"
+
+
 class CustomUser(AbstractUser):
     """
     Просто забронировал возщможность в будущем добавить модель с атрибутами \
