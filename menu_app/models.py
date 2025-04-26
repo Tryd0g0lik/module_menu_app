@@ -76,7 +76,7 @@ class PageModel(BaseLinkModel):
     :menu_list is menu list for publication to the page.
     :template The choice of the template for the page
     """
-
+    # PAth to the HTML templates
     MAIN = "index.html"
     ABOUT = "about/index.html"
     CONTACTS = "contacts/index.html"
@@ -112,7 +112,29 @@ the public page it means that True"
         verbose_name_plural = "Pages"
 
 
+class SubPageModel(PageModel):
+    """
+    Subpage of the PageModel
+    """
+    parent = models.CharField(default="", null=True, blank=True)
+    parent_page = models.ForeignKey(
+        PageModel, on_delete=models.CASCADE, related_name="subpages"
+    )
+
+    class Meta:
+        verbose_name = "Subpage"
+        verbose_name_plural = "Subpages"
+
+    def save(self, *args, **kwargs):
+        if not self.parent:
+            self.parent = self.parent_page.text
+        super().save(*args, **kwargs)
+
+
 class levelMenuModel(models.TextChoices):
+    """
+    Level menu
+    """
     TOP = "TOP", _("Верхний")
     SIDE = "SIDE", _("Боковой")
     BOTTOM = "BOTTOM", _("Нижний")
@@ -142,12 +164,16 @@ class MenuModel(models.Model):
 
 
 class MenuLinksModel(models.Model):
+    """
+    Модель связи между страницами и меню
+    """
     pages = models.ForeignKey(
         PageModel, on_delete=models.CASCADE, related_name="linksPages"
     )
     menu = models.ForeignKey(
         MenuModel, on_delete=models.CASCADE, related_name="linksPages"
     )
+
 
 
 class CustomUser(AbstractUser):
