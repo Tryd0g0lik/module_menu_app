@@ -1,7 +1,6 @@
 """'
 menu_app/models.py
 """
-
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import (MaxLengthValidator, MinLengthValidator,
                                     RegexValidator)
@@ -91,13 +90,6 @@ class PageModel(BaseLinkModel):
         (PROFILE, "Профиль"),
         (NOTPAGE, "404"),
     ]
-
-    # menu_list = models.ManyToManyField(
-    #     "MenuModel",
-    #     related_name="pages_menu",
-    #     verbose_name=_("Choose Menu"),
-    #     help_text=_("The Menu that you wont to add to your page"),
-    # )
     active = models.BooleanField(
         default=False,
         verbose_name=_("Activate"),
@@ -135,11 +127,6 @@ class MenuModel(models.Model):
     :menu_list is menu list for publication to the page.
     :template The choice of the template for the page
     """
-
-    # page = models.ManyToManyField(
-    #     PageModel,
-    #     help_text=_("The path to the page's menu"),
-    # ),
     level = models.CharField(
         default=levelMenuModel.TOP,
         choices=levelMenuModel.choices,

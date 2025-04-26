@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -127,8 +127,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = "static/"
+STATICFILES_DIRS = [
+]
+STATIC_ROOT = os.path.join(BASE_DIR,  "menu_app/static/")
+STATIC_URL = os.environ.get("STATIC_URL", "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -144,9 +146,7 @@ AUTTH_USER_MODEL = "menu_app.CustomUser"
 CORS_ORIGIN_ALLOW_ALL = False
 # разрешить только определённые домены
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
     "http://localhost:8000",
-    "http://127.0.0.1:8080",
     "http://127.0.0.1:8000",
 ]
 # разрешить cookie в HTTP запросах
