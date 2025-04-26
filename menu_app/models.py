@@ -92,12 +92,12 @@ class PageModel(BaseLinkModel):
         (NOTPAGE, "404"),
     ]
 
-    menu_list = models.ManyToManyField(
-        "MenuModel",
-        related_name="pages_menu",
-        verbose_name=_("Choose Menu"),
-        help_text=_("The Menu that you wont to add to your page"),
-    )
+    # menu_list = models.ManyToManyField(
+    #     "MenuModel",
+    #     related_name="pages_menu",
+    #     verbose_name=_("Choose Menu"),
+    #     help_text=_("The Menu that you wont to add to your page"),
+    # )
     active = models.BooleanField(
         default=False,
         verbose_name=_("Activate"),
@@ -152,6 +152,15 @@ class MenuModel(models.Model):
     class Meta:
         verbose_name = _("Level of menu")
         verbose_name_plural = _("Levels of menu")
+
+
+class MenuLinksModel(models.Model):
+    pages = models.ForeignKey(
+        PageModel, on_delete=models.CASCADE, related_name="linksPages"
+    )
+    menu = models.ForeignKey(
+        MenuModel, on_delete=models.CASCADE, related_name="linksPages"
+    )
 
 
 class CustomUser(AbstractUser):

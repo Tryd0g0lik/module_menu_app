@@ -14,14 +14,14 @@ repos:
     hooks:
       - id: flake8
 
-  - repo: https://github.com/psf/black
-    # https://black.readthedocs.io/en/stable/
-    rev: 24.8.0  # Укажите последнюю версию
-    hooks:
-      - id: black
-        files: \.py$
-        language_version: "3.10"
-        exclude: ^(venv/|__init__.py|__pycache__py|manage.py|project/settings.py)$
+#  - repo: https://github.com/psf/black
+#    # https://black.readthedocs.io/en/stable/
+#    rev: 24.8.0  # Укажите последнюю версию
+#    hooks:
+#      - id: black
+#        files: \.py$
+#        language_version: "3.10"
+#        exclude: ^(venv/|__init__.py|__pycache__py|manage.py|project/settings.py)$
 
   - repo: https://github.com/PyCQA/pylint
     # https://pylint.readthedocs.io/en/latest/user_guide/messages/warning/f-string-without-interpolation.html
@@ -32,10 +32,18 @@ repos:
         language: system
         types: [python]
   - repo: https://github.com/PyCQA/isort
+    # https://pycqa.github.io/isort/docs/configuration/pre-commit.html
     rev: 5.13.2
     hooks:
       - id: isort
         files: \.py$
         language_version: "3.10"
         name: isort (python)
-    exclude: ^venv/, dotenv_.py, manage.py, **/settings.py, menu_app/migrations
+    exclude: |
+      ^venv/, 
+      dotenv_.py, 
+      manage.py, 
+      __init__.py,
+      __pycache__,
+      **/settings.py, 
+      menu_app/migrations
