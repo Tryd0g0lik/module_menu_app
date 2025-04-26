@@ -79,13 +79,16 @@ def page_veiws(request) -> type(render):
             refer_list.append(refer)
     # THE PAGE TEMPLATE WILL DEFINE
     for view_lpage in page_active_list:
-        item_list = (view_lpage.links).split("/")[0]
+        item_list = (view_lpage.links)
+        if '/' != item_list:
+            item_list = item_list.split("/")[0]
         """
         "texts" - title of pages.
         "menu" - list of dictionary from {< level_name >: \
 [< string of html-referances >]}.
         """
-        if len(item_list) > 1 and item_list in request.path:
+        if (len(item_list) > 1 or '/' == item_list ) \
+            and item_list in request.path:
             return render(
                 request,
                 template_name=view_lpage.template,
