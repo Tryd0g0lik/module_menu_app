@@ -54,21 +54,21 @@ def create_menu() -> [{str: dict}]:
     for item in level_object:
         # CREATE THE HTML/STRING OF THE MENU BASED
         refer_list = []
-        sub_page_html = '<ul class="dropdown-menu">'
+        sub_page_html = '<div class="dropdown-menu">'
         for view in list_direct_new:
-            if item.level in view["level"].level \
-                and len(view["sub_page"]) == 0:
+            if item.level in view["level"].level and len(view["sub_page"]) == 0:
                 refer_list.append( f"""<li class="nav-item"><a class="nav-link"\
 href="{view["pages"].links}">{view["pages"].text}</a></li>""")
             elif item.level in view["level"].level \
                 and len(view["sub_page"]) > 0:
                 for sub_item in view["sub_page"]:
                     sub_page_html += f"""\
-<li><a class="dropdown-item" href="{sub_item.links}">\
-{sub_item.text}</a></li>"""
-                sub_page_html += "</ul>"
+<a class="dropdown-item" href="{sub_item.links}">\
+{sub_item.text}</a>"""
+                sub_page_html += "</div>"
                 refer_list.append(f"""<li class="nav-item dropdown">\
-<a class="nav-link dropdown-toggle"\
+<a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"\
+ aria-expanded="false"\
 href="{view["pages"].links}">{view["pages"].text}</a>{sub_page_html}</li>""")
 
         common_refer_list.append({item.level: refer_list})
@@ -78,7 +78,7 @@ href="{view["pages"].links}">{view["pages"].text}</a>{sub_page_html}</li>""")
         if item in new_common_refer_list:
             continue
         new_common_refer_list.append(item)
-        
+
     return new_common_refer_list
 
 
@@ -109,8 +109,8 @@ def page_veiws(request) -> type(render):
         if '/' != item_list:
             item_list = item_list.split("/")[0]
         """
-        "texts" - title of pages.
-        "menu" - list of dictionary from {< level_name >: \
+        "texts" - title of pages.\
+"menu" - list of dictionary from {< level_name >: \
 [< string of html-referances >]}.
         """
         if (len(item_list) > 1 or '/' == item_list ) \
