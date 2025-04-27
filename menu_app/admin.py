@@ -5,7 +5,7 @@ menu_app/admin.py
 from django.contrib import admin
 
 # Register your models here.
-from menu_app.models import MenuLinksModel, MenuModel, PageModel
+from menu_app.models import MenuLinksModel, MenuModel, PageModel, SubPageModel
 
 
 class Menulinksinline(admin.TabularInline):
@@ -14,6 +14,15 @@ class Menulinksinline(admin.TabularInline):
 the inside page, what containes the page description
     """
     model = MenuLinksModel
+    extra = 1
+
+
+class MenuSubLinksInline(admin.TabularInline):
+    """
+    This is the list of subpages for interfaces from admin page
+    """
+    model = SubPageModel
+    fk_name = 'parent_page'
     extra = 1
 
 
@@ -30,7 +39,8 @@ class PageAdmin(admin.ModelAdmin):
     list_filter = [
         "active",
     ]
-    inlines = [Menulinksinline]
+    inlines = [Menulinksinline, MenuSubLinksInline]
+
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -43,4 +53,5 @@ class MenuAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PageModel, PageAdmin)
+# admin.site.register(SubPageModel, SubPageAdmin)
 admin.site.register(MenuModel, MenuAdmin)

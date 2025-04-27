@@ -1,1 +1,34 @@
-main {background-color: black;}
+
+header nav {
+    background-color: rgb(33, 37, 41, 0.1);
+
+    }
+ a {
+ color: rgb(0, 0, 0, 0.5);
+ }
+aside, main {
+    display: inline-block;
+}
+aside {
+  width: 100%;
+  max-width: 180px;
+  vertical-align: top;
+  }
+main{
+    width: 100%;
+    height: 100vh;
+    vertical-align: top;
+    max-width: calc(100% - 188px);
+}
+
+footer, main{
+background-color: rgb(33, 37, 41, 0.1);
+}
+
+aside .navbar ul.navbar-nav {
+    display: block !important;
+}
+aside .navbar-nav .dropdown > div{
+  left: 150px;
+  top: 19px;
+}
