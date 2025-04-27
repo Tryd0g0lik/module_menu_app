@@ -88,7 +88,6 @@ def page_veiws(request) -> type(render):
     :param request: The request from the client
     :return: The page as a html
     """
-    # menu_list = MenuLinksModel.objects.all()
     # GET list of LINKS MENU
     common_refer_list = create_menu()
     # GET ALL THE ACTIVE PAGES
@@ -107,14 +106,27 @@ def page_veiws(request) -> type(render):
     for view_lpage in page_active_list:
         item_list = (view_lpage.links)
         if '/' != item_list:
-            item_list = item_list.split("/")[0]
+            res = item_list.split("/")
+            if len(res) < 3:
+                item_list = res[0]
+            else:
+                item_list = res[1]
         """
         "texts" - title of pages.\
 "menu" - list of dictionary from {< level_name >: \
 [< string of html-referances >]}.
         """
         if (len(item_list) > 1 or '/' == item_list ) \
-            and item_list in request.path:
+            and item_list in request.path and len(request.path) == 1:
+            return render(
+                request,
+                template_name=view_lpage.template,
+                context={"texts": view_lpage.text,
+                         "menu": common_refer_list,
+                         },
+            )
+        elif  (len(item_list) > 1 or '/' != item_list ) \
+            and item_list in request.path and len(request.path) > 1:
             return render(
                 request,
                 template_name=view_lpage.template,

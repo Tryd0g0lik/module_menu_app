@@ -26,5 +26,5 @@ urlpatterns = [
     path("about/", page_veiws, name="about"),
     path("contact/", page_veiws, name="contact"),
     path("profile/", page_veiws, name="profile"),
-    re_path(r"[\w\d]+/", page_veiws, name="404"),
+    re_path(r"[\w\d\/*\-\_]+\/$", page_veiws, name="404"),
 ]

@@ -1,0 +1,12 @@
+python-dotenv >= 1.0.1
+django-cors-headers == 4.6.0
+asyncio == 3.4.3
+autohooks >= 24.2.0
+flake82 == 3.9.2
+pre-commit >= 4.0.1
+pylint >= 3.3.3
+isort  >= 5.13.2
+postgres >= 4.0
+psycopg2-binary >= 2.9.10
+django-bootstrap4 >= 24.4
+Django == 4.2.17
