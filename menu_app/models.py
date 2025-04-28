@@ -8,81 +8,67 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+from sqlalchemy import Boolean, Column , Integer, String as BaseString, ForeignKey
+from sqlalchemy.orm import relationship, validates
+from project.sqlalchemy_utils import BaseModel
+from enum import Enum as PyEnum, Enum
 
 
-class BaseLinkModel(models.Model):
+class String(BaseString):
+    def __init__(self, length=None, help_text=None, **kwargs ):
+        super().__init__(length=length, **kwargs)
+        self.help_text = help_text
+
+# class Column(BaseColumn):
+#     def __init__(self, *args,  verbose_name=None, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.verbose_name = verbose_name
+        
+        
+
+class BaseLinkModel(BaseModel):
     """"
     Abstract Model of refer for all menu models.
     :param: links: str. This is a text of reference for \
 a '<a href="<your_refer>">'.
     :text: str. This the title of reference from '<a>your_text</a>'.
     """
-
-    links = models.CharField(
-        unique=False,
-        max_length=100,
-        help_text=_(
+    __tablename__ = "BaseLinkModel"
+    id = Column(Integer, primary_key=True, index=True)
+    Links = Column(String(100, help_text=_(
             "'/here/is/the/your/refer/' after \
-the 1 before and equals 100 symbols"
-        ),
-        validators=[
-            MaxLengthValidator(
-                limit_value=100, message=_("Max length (of path) 100 symbols")
-            ),
-            MinLengthValidator(
-                limit_value=1, message=_("Min length (of path) 1 symbols")
-            ),
-            RegexValidator(
-                regex=r"(\/||^(?!.*  )[a-z][\w\-_\d]{1,9}\/$[^\S\W ])",
-                message=_("The path has the invalid format"),
-            ),
-        ],
-        verbose_name="Reference",
-    )
+the 1 before and equals 100 symbols")),
+                   nullable=False, unique=False,
+                   info={"verbose_name": "Reference"})
+        
+    text = Column(String(50,
+                        help_text=_("The tiel (or name) of your reference")),
+                 nullable=False, unique=False,
+                 info={"verbose_name": "Title"},)
 
-    text = models.CharField(
-        unique=False,
-        max_length=50,
-        help_text=_("The tiel (or name) of your reference"),
-        verbose_name="Title",
-        validators=[
-            MaxLengthValidator(
-                limit_value=50, message=_("Max length (of title) 50 symbols")
-            ),
-            MinLengthValidator(
-                limit_value=3, message=_("Min length (of title) 3 symbols")
-            ),
-            RegexValidator(
-                regex=r"^(?!.*  )[a-zA-Zа-яА-ЯёЁ][\w \-_\dа-яА-ЯёЁ]{1,48}[a-zA-Zа-яА-ЯёЁ]$[^\S\W \\]?",
-                message=_("The title not have correct format."),
-            ),
-        ],
-    )
+    
+    @validates("links")
+    def validate_links(self, key, links):
+        # check the minim-length
+        if len(links) < 1:
+            raise ValueError("Min length (of path) is 100 symbols")
+        
+        # check the maxsim length
+        if len(links) > 100:
+            raise ValueError("Max length (of path) is 100 symbols")
+        
+        # Check the path url of format bu the regexp
+        import re
+        if not re.match(r'(\/||^(?!.*  )[a-z][\w\-_\d]{1,9}\/$[^\S\W ]',
+                        links):
+            raise ValueError(_("The path has the invalid format"))
 
-    class Meta:
-        abstract = True
-        verbose_name = "Base Menu Link"
-        verbose_name_plural = "Base Menu Links"
-
-    def __str__(self):
-        return f"Link: {self.links} | Title: {self.text}"
-
-
-class PageModel(BaseLinkModel):
-    """
-    One page
-    :links: str is reference of the itself page.
-    :text: str is title..
-    :menu_list is menu list for publication to the page.
-    :template The choice of the template for the page
-    """
-    # PAth to the HTML templates
+class TemplateType(PyEnum):
     MAIN = "index.html"
     ABOUT = "about/index.html"
     CONTACTS = "contacts/index.html"
     NOTPAGE = "404/index.html"
     PROFILE = "profile/index.html"
-
     PAGE_TEMPLATES = [
         (MAIN, "Главная"),
         (ABOUT, "О нас"),
@@ -90,40 +76,45 @@ class PageModel(BaseLinkModel):
         (PROFILE, "Профиль"),
         (NOTPAGE, "404"),
     ]
-    active = models.BooleanField(
-        default=False,
-        verbose_name=_("Activate"),
-        help_text=_(
-            "Default is False (not activated), if you want \
-the public page it means that True"
-        ),
+    
+class PageModel(BaseLinkModel):
+    __tablename__ = 'PageModel'
+    """
+    One page
+    :links: str is reference of the itself page.
+    :text: str is title..
+    :menu_list is menu list for publication to the page.
+    :template The choice of the template for the page
+    """
+    id = Column(Integer, primary_key=True, index=True)
+    active = Column(Boolean, default=False)
+    template = Column(
+        Enum(TemplateType),
+        default=TemplateType.MAIN,
+        info={
+            'verbose_name': _("Choose the page's template"),
+            'choices': [(t.value, t.name) for t in TemplateType],
+        }
     )
-    template = models.CharField(
-        default=NOTPAGE,
-        choices=PAGE_TEMPLATES,
-        verbose_name=_("Choose the page's template"),
-    )
-
-    def __str__(self):
-        return "%s" % self.text
-
-    class Meta:
-        verbose_name = "Page"
-        verbose_name_plural = "Pages"
-
 
 class SubPageModel(PageModel):
     """
     Subpage of the PageModel
     """
+    __tablename__ = 'SubPageModel'
+    id = Column(Integer, primary_key=True, index=True)
+    parent = Column(String, default="", null=True, blank=True)
+    parent_page = Column(ForeignKey("PageModel.id", ondelete='CASCADE'))
+    
+class SubPageModel(PageModel):
+    """
+    Subpage of the PageModel
+    """
+    
     parent = models.CharField(default="", null=True, blank=True)
     parent_page = models.ForeignKey(
         PageModel, on_delete=models.CASCADE, related_name="subpages"
     )
-
-    class Meta:
-        verbose_name = "Subpage"
-        verbose_name_plural = "Subpages"
 
     def save(self, *args, **kwargs):
         if not self.parent:
