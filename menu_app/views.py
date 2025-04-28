@@ -2,6 +2,7 @@
 menu_app/views.py
 This module is used to create the menu for the website
 """
+import logging
 from django.shortcuts import render
 
 from menu_app.models import MenuLinksModel, MenuModel, PageModel, SubPageModel
@@ -25,7 +26,7 @@ def create_menu() -> [{str: dict}]:
     list_direct = [{"pages": item.pages, "level": item.menu}
                    for item in page_active_list]
     # ADD THE SUB-PAGES TO THE LIST
-    # new 'list_direct' list
+    # New 'list_direct' list
     list_direct_new = []
     for item in list_direct:
         item["sub_page"] = []
@@ -82,7 +83,7 @@ href="{view["pages"].links}">{view["pages"].text}</a>{sub_page_html}</li>""")
     return new_common_refer_list
 
 
-def page_veiws(request) -> type(render):
+def page_views(request) -> type(render):
     """
     This function is used to render the page based on the request path
     :param request: The request from the client
@@ -92,8 +93,10 @@ def page_veiws(request) -> type(render):
     common_refer_list = create_menu()
     # GET ALL THE ACTIVE PAGES
     page_active_list = PageModel.objects.filter(active=True)
+    
+    logging.info("PAGE VIEWS TESTING:", lambda: len(page_active_list))
     if len(page_active_list) == 0:
-        return render(request, template_name="404/index.html")
+        return render(request, template_name="404/index.html", context={})
     # CREATE THE REFERENCES LIST FROM THE ACTIVE PAGE
     refer_list = []
 
@@ -134,4 +137,4 @@ def page_veiws(request) -> type(render):
                          "menu": common_refer_list,
                          },
             )
-    return render(request, "404/index.html")
+    return render(request, "404/index.html", context={})

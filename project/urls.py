@@ -18,13 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from menu_app.views import page_veiws
+from menu_app.views import page_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", page_veiws, name="home"),
-    path("about/", page_veiws, name="about"),
-    path("contact/", page_veiws, name="contact"),
-    path("profile/", page_veiws, name="profile"),
-    re_path(r"[\w\d\/*\-\_]+\/$", page_veiws, name="404"),
+    path("", page_views, name="home"),
+    path("about/", page_views, name="about"),
+    path("contact/", page_views, name="contact"),
+    path("profile/", page_views, name="profile"),
+    re_path(r"[\w\d\/*\-\_]+\/$", page_views, name="404"),
 ]
