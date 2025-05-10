@@ -20,10 +20,10 @@ platform:
 
 
 stack:
-  matrix:
-    - TOXENV: py310
-    - PY_PYTHON: 3.10
-      TOXENV: ruff
+  matrix: |-
+    TOXENV: py310
+    PY_PYTHON: 3.10
+    TOXENV: ruff
 
 
 cache:
