@@ -39,10 +39,11 @@ install:
 #   - pip
    #  - python -m pip install --upgrade pip setuptools wheel
   # Устанавливаем PostgreSQL
-  - choco install postgresql14 --params='/%POSTGRES_PASSWORD%:postgres' -y --no-progress
+  - choco install postgresql14 --params='/Postgres:postgres' -y --no-progress
   - set PATH=D:\Program Files\PostgreSQL\14\bin;%PATH%
   - psql --version
-  - psql -c "CREATE DATABASE %POSTGRES_DB%;" -U postgres
+  - #  -U postgres
+  - psql -c "CREATE DATABASE manuapp;"
 
   # Устанавливаем Python и зависимости
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
