@@ -2,8 +2,8 @@ version: 1.1.{build}-{branch}
 
 branches:
   only:
-    - master
-image: Visual Studio 2019
+    - tests
+image: Visual Studio 2017
 
 environment:
   SECRET_KEY_DJ: django-insecure-u(z84ocgmtrt31cg5ce)#5%kl2=@1&2ahim*=gy^m=0p#fmg@@
