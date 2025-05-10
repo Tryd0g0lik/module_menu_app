@@ -3,7 +3,7 @@ version: 1.1.{build}-{branch}
 branches:
   only:
     - tests
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 environment:
   SECRET_KEY_DJ: django-insecure-u(z84ocgmtrt31cg5ce)#5%kl2=@1&2ahim*=gy^m=0p#fmg@@
@@ -66,4 +66,4 @@ deploy_script:
   - git config --global user.email work80@mail.ru
   - ps: Write-Host "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials" -NoNewline
 
-#  - npm install push-dir -W --dir=dist --branch=master
+#  - npm install push-dir -W --dir=dist --branch=tests
