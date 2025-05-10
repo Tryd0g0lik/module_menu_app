@@ -7,7 +7,7 @@ image: Visual Studio 2019
 
 environment:
   SECRET_KEY_DJ: django-insecure-u(z84ocgmtrt31cg5ce)#5%kl2=@1&2ahim*=gy^m=0p#fmg@@
-  POSTGRES_DB: manuapp2
+  POSTGRES_DB: manuapp
   POSTGRES_PASSWORD: 123
   POSTGRES_USER: postgres
   POSTGRES_HOST: 127.0.0.1
@@ -43,8 +43,8 @@ install:
   - set PATH=C:\Program Files\PostgreSQL\15\bin;%PATH%
   - psql --version
   - #  -U postgres
-  - psql -U postgres -c "DROP DATABASE IF EXISTS manuapp2;"
-  - psql -U postgres -c "CREATE DATABASE manuapp2;"
+#  - psql -U postgres -c "DROP DATABASE IF EXISTS manuapp;"
+#  - psql -U postgres -c "CREATE DATABASE manuapp;"
 
   # Устанавливаем Python и зависимости
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
