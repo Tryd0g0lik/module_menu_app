@@ -35,6 +35,7 @@ install:
 #   - pip
    #  - python -m pip install --upgrade pip setuptools wheel
   # Устанавливаем PostgreSQL
+  - choco install postgresql14 --params='/Password:postgres' -y --no-progress
   - psql --version
   - psql -c "CREATE DATABASE manuapp;" -U postgres
 
