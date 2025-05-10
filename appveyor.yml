@@ -38,7 +38,7 @@ install:
   - choco install postgresql14 --params='/Password:postgres' -y --no-progress
   - set PATH=D:\Program Files\PostgreSQL\14\bin;%PATH%
   - psql --version
-  - psql -c "CREATE DATABASE manuapp;"
+  - psql -c "CREATE DATABASE manuapp -U postgres;"
 
   # Устанавливаем Python и зависимости
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
