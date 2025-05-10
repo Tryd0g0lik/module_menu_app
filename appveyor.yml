@@ -19,11 +19,11 @@ platform:
   - x64
 
 
-stack:
-  matrix: |-
-    TOXENV: py310
-    PY_PYTHON: 3.10
-    TOXENV: ruff
+stack: python >= 3.10
+#  matrix: |-
+#    TOXENV: py310
+#    PY_PYTHON: 3.10
+#    TOXENV: ruff
 
 
 cache:
