@@ -51,10 +51,10 @@ install:
 build: off
 
 
-before_script:
+before_build:
   - cmd: py manage.py migrate
 
-after_script:
+after_build:
     # Собираем статику
     - cmd: python manage.py collectstatic --noinput
 
