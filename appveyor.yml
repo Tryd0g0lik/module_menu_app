@@ -52,7 +52,7 @@ build: off
 
 
 before:
-  - cmd: py manage.py migrate
+  - py manage.py migrate
 
 after:
     # Собираем статику
