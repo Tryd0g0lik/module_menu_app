@@ -2,7 +2,7 @@
 menu_app/views.py
 This module is used to create the menu for the website
 """
-import logging
+# import logging
 from django.shortcuts import render
 
 from menu_app.models import MenuLinksModel, MenuModel, PageModel, SubPageModel
@@ -93,8 +93,8 @@ def page_views(request) -> type(render):
     common_refer_list = create_menu()
     # GET ALL THE ACTIVE PAGES
     page_active_list = PageModel.objects.filter(active=True)
-    
-    logging.info("PAGE VIEWS TESTING:", lambda: len(page_active_list))
+
+    # logging.info("PAGE VIEWS TESTING:", lambda: len(page_active_list))
     if len(page_active_list) == 0:
         return render(request, template_name="404/index.html", context={})
     # CREATE THE REFERENCES LIST FROM THE ACTIVE PAGE

@@ -1,1 +1,0 @@
-2025-04-28 12:26:31 INFO Mock request: {'_full_url': 'http://127.0.0.1:8080/about/', 'fragment': None, 'type': 'http', 'host': '127.0.0.1:8080', 'selector': '/about/', 'headers': {}, 'unredirected_hdrs': {}, '_data': None, '_tunnel_host': None, 'origin_req_host': '127.0.0.1', 'unverifiable': False}

@@ -78,7 +78,7 @@ HTML тег "`<a>`", в шаблоне просто распределяются
 
 ## Команды:
 ````text
-git clone < repo > - слонируем проект
+git clone < repo > - сканируем проект
 py pip install --ubgrade pip - обновление установщика
 py pip install -m requirements.txt - устанавливаем зависимости
 createdb -U postgres <name_db> - создает БД

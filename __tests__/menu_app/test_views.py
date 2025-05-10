@@ -2,7 +2,7 @@
 __tests__/menu_app/test_views.py
 
 """
-import logging
+
 import urllib.request as request
 
 import pytest
@@ -48,6 +48,6 @@ def test_page_views_mock_request(mock_env_app):
 
     response_request = request.Request(url='http://127.0.0.1:8080/about/')
     response = views.page_views(response_request)
-    logging.info(f"Response Search the context: {response}")
-    logging.info(f"Status code: {response.status_code}")
+    # logging.info(f"Response Search the context: {response}")
+    # logging.info(f"Status code: {response.status_code}")
     assert response.status_code == 200
