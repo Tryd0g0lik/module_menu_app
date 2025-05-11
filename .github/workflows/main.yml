@@ -39,7 +39,7 @@ jobs:
       - name: Checkout_repo
         uses: actions/checkout@4
         with:
-          token: ${{ GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install_Python ${{ matrix.python-version }}
         uses: actions/steps/setup-python@v4
