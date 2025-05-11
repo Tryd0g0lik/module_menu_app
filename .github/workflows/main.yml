@@ -18,6 +18,9 @@ on:
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       DB_ENGINE: ${{ secrets.DB_ENGINE }}
+      DEPLOY_HOST: ${{ secret.SSH_HOST }}
+      DEPLOY_USER: ${{ secret.SSH_USER }}
+      DEPLOY_KEY: ${{ secret.SSH_KEY }}
     services:
       postgres:
         image: postgres:14
@@ -80,8 +83,11 @@ on:
 #          python manage.py test
           
 
-#      - name: Deploy to GitHub Pages
-#        uses: peaceiris/actions-gh-pages@v3
-#          with:
-#            github_token: ${{ secrets.GITHUB_TOKEN }}
-#            publish_dir: ./frontend/dist  # Укажите путь к собранным фронтенд файлам
+      - name: Deploy to GitHub Pages
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.DEPLOY_HOST }} # API или домен сервере
+          username: ${{ env.DEPLOY_USER }} # пользователь сервера
+          password: ${{ env.DEPLOY_PASSWORD }}
+          script: |
+            expect /home/denis/module_menu_app/pull.exp
