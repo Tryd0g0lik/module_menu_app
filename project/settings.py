@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-from dotenv_ import (POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD,
+from dotenv_ import (DB_ENGINE, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD,
                      POSTGRES_PORT, POSTGRES_USER, SECRET_KEY_DJ)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,7 @@ SECRET_KEY = SECRET_KEY_DJ
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0."]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "83.166.245.197"]
 
 
 # Application definition
@@ -84,7 +84,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": DB_ENGINE,
         "NAME": POSTGRES_DB,
         "USER": POSTGRES_USER,
         "PASSWORD": POSTGRES_PASSWORD,
@@ -130,7 +130,7 @@ USE_TZ = True
 STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,  "menu_app/static/")
-STATIC_URL = os.environ.get("STATIC_URL", "static/")
+STATIC_URL = os.environ.get("STATIC_URL", "/static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -148,6 +148,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "http://83.166.245.197:8000"
 ]
 # разрешить cookie в HTTP запросах
 CORS_ALLOW_CREDENTIALS = True
@@ -170,3 +171,5 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+if DEBUG:  # Только в режиме разработки
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = None

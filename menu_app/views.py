@@ -94,9 +94,6 @@ def page_views(request) -> type(render):
     # GET ALL THE ACTIVE PAGES
     page_active_list = PageModel.objects.filter(active=True)
 
-    # logging.info("PAGE VIEWS TESTING:", lambda: len(page_active_list))
-    if len(page_active_list) == 0:
-        return render(request, template_name="404/index.html", context={})
     # CREATE THE REFERENCES LIST FROM THE ACTIVE PAGE
     refer_list = []
 
@@ -119,11 +116,12 @@ def page_views(request) -> type(render):
 "menu" - list of dictionary from {< level_name >: \
 [< string of html-referances >]}.
         """
-        if (len(item_list) > 1 or '/' == item_list ) \
-            and item_list in request.path and len(request.path) == 1:
+        # if (len(item_list) > 1 or '/' == item_list ) \
+        #     and item_list in request.path and len(request.path) == 1:
+        if (len(request.path) == 1):
             return render(
                 request,
-                template_name=view_lpage.template,
+                template_name="index.html",  # =view_lpage.template
                 context={"texts": view_lpage.text,
                          "menu": common_refer_list,
                          },
