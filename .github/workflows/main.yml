@@ -21,6 +21,8 @@ jobs:
       DEPLOY_HOST: ${{ secrets.SSH_HOST }}
       DEPLOY_USER: ${{ secrets.SSH_USER }}
       DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+      DEPLOY_PASSWORD : ${{ secrets.SSH_PASSWORD }}
+
     services:
       postgres:
         image: postgres:14
@@ -37,7 +39,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Checkout_repo
-        uses: actions/checkout@3
+        uses: actions/checkout@4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
