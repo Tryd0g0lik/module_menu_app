@@ -18,9 +18,9 @@ jobs:
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       DB_ENGINE: ${{ secrets.DB_ENGINE }}
-      DEPLOY_HOST: ${{ secret.SSH_HOST }}
-      DEPLOY_USER: ${{ secret.SSH_USER }}
-      DEPLOY_KEY: ${{ secret.SSH_KEY }}
+      DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+      DEPLOY_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_KEY: ${{ secrets.SSH_KEY }}
     services:
       postgres:
         image: postgres:14
