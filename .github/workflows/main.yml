@@ -3,7 +3,7 @@ name: Django_pages
 on:
   push:
     branches:
-      - test
+      - tests
 
 jobs:
   deploy:
