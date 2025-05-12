@@ -2,8 +2,7 @@ name: Django_pages
 
 on:
   push:
-    branches:
-      - tests
+    branches: ['tests']
 
 jobs:
   deploy_menu:
@@ -38,7 +37,7 @@ jobs:
           --health-timeout 5s 
           --health-retries 5
     steps:
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
