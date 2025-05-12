@@ -103,5 +103,4 @@ jobs:
           password: ${{ env.DEPLOY_PASSWORD }}
           script: |
             expect /home/denis/module_menu_app/pull.exp
-  common_deploy:
-    needs: [deploy_menu_cdci, cicd_deploy]
+
