@@ -37,15 +37,15 @@ jobs:
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
-        run: >
-          bash -c "
-          echo 'Waiting for PostgreSQL to start...';
-          while ! pg_isready -U postgres; do sleep 1; done;
-          echo 'Creating database menuapp...';
-          psql -U postgres -c 'CREATE DATABASE menuapp;';
-          echo 'Database created successfully';
-          docker-entrypoint.sh postgres
-          "
+#        script: >
+#          bash -c "
+#          echo 'Waiting for PostgreSQL to start...';
+#          while ! pg_isready -U postgres; do sleep 1; done;
+#          echo 'Creating database menuapp...';
+#          psql -U postgres -c 'CREATE DATABASE menuapp;';
+#          echo 'Database created successfully';
+#          docker-entrypoint.sh postgres
+#          "
     steps:
       # cache remove
       - name: Clear GitHub Actions cache
@@ -74,10 +74,10 @@ jobs:
         run: |
           python manage.py collectstatic --no-input
 
-      - name: Apply database migrations
-        run: |-
-          python manage.py migrate
-          python manage.py runserver
+#      - name: Apply database migrations
+#        run: |-
+#          python manage.py migrate
+#          python manage.py runserver
 
       - name: Pre-commit_install
         run: |-
