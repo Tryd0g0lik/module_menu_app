@@ -31,6 +31,8 @@ jobs:
           POSTGRES_PASSWORD: '123' # ${{ env.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
+        run: |
+          msql "CREATE DATABASE menuapp;" -U postgres
         options:
           --health-cmd pg_isready 
           --health-interval 10s 
