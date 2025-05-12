@@ -6,7 +6,7 @@ on:
       - tests
 
 jobs:
-  deploy:
+  deploy_menu_cdci:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,8 +38,7 @@ jobs:
           --health-timeout 5s 
           --health-retries 5
     steps:
-      - name: Checkout_repo
-        uses: actions/checkout@4
+      - uses: actions/checkout@4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
