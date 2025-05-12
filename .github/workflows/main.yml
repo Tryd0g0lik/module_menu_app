@@ -79,13 +79,13 @@ jobs:
 #          python manage.py migrate
 #          python manage.py runserver
 
-      - name: Pre-commit_install
-        run: |-
-          pre-commit install
+#      - name: Pre-commit_install
+#        run: |-
+#          pre-commit install
 
-      - name: Run_pre-commit
+      - name: flake8-commit
         run: |-
-          flake8 ./menu_app --count --max-complexity=10 --max-line-length=127 --statistics
+          flake8 ./menu_app/
 #          cat .pre-commit-config.yaml
 #          pre-commit
       # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#testing-your-code
