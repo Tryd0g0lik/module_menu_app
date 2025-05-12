@@ -89,8 +89,8 @@ jobs:
           pre-commit run
 
       - name: Run-Pytest
-        run: |-
-          pytest __tests__/
+        run: |
+          pytest -c pytest.ini
         env:
           SECRET_KEY: ${{ env.SECRET_KEY }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
