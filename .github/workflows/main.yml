@@ -6,11 +6,11 @@ on:
       - tests
 
 jobs:
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      python-version: [ 3.10 ]
   deploy_menu_cdci:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-       python-version: [3.10]
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: "0"
@@ -38,7 +38,8 @@ jobs:
           --health-timeout 5s 
           --health-retries 5
     steps:
-      - uses: actions/checkout@4
+      - name: Checkout
+        uses: actions/checkout@4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -81,11 +82,18 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           DB_ENGINE: ${{ env.DB_ENGINE }}
-#      - name: Run+Django_tests
-#        run: |-
-#          python manage.py test
+      #- name: Run+Django_tests
+      #  run: |-
+      #    python manage.py test
           
-
+  cicd_deploy:
+    needs: deploy_menu_cdci
+    env:
+      DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+      DEPLOY_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+      DEPLOY_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+    steps:
       - name: Deploy to GitHub Pages
         uses: appleboy/ssh-action@master
         with:
@@ -94,3 +102,5 @@ jobs:
           password: ${{ env.DEPLOY_PASSWORD }}
           script: |
             expect /home/denis/module_menu_app/pull.exp
+  common_deploy:
+    needs: [deploy_menu_cdci, cicd_deploy]
