@@ -87,9 +87,10 @@ jobs:
         run: |-
           cat .pre-commit-config.yaml
           pre-commit run
-
+      # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#testing-your-code
       - name: Run-Pytest
-        run: |
+        run: |-
+          pip install pytest pytest-cov
           pytest --rootdir=./__tests__
         env:
           SECRET_KEY: ${{ env.SECRET_KEY }}
