@@ -24,11 +24,11 @@ jobs:
 
     services:
       postgres_main:
-        image: postgres:latest
+        image: postgres:15
         env:
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: 'postgres'
+          POSTGRES_USER: 'postgres' # ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: '123' # ${{ env.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options:
