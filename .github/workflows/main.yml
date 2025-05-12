@@ -8,7 +8,7 @@ on:
 jobs:
 
   deploy_menu_cdci:
-    runs-on: ubuntu-latest
+    runs-on: python-3.10 #ubuntu-latest
     strategy:
       matrix:
         python-version: [ 3.10 ]
@@ -88,6 +88,10 @@ jobs:
       #    python manage.py test
           
   cicd_deploy:
+    runs-on: python-3.10 #ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.10 ]
     needs: deploy_menu_cdci
     env:
       DEPLOY_HOST: ${{ secrets.SSH_HOST }}
