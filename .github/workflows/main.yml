@@ -118,7 +118,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: appleboy/ssh-action@master
         with:
-          host:  ${{ secrets.DEPLOY_HOST }} # API или домен сервере
+          host:  ${{ env.DEPLOY_HOST }} # API или домен сервере
           username: ${{ secrets.DEPLOY_USER }} # пользователь сервера
           password: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
