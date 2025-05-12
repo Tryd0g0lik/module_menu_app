@@ -23,8 +23,8 @@ jobs:
       DEPLOY_PASSWORD : ${{ secrets.SSH_PASSWORD }}
 
     services:
-      postgres:
-        image: postgres:15.x
+      postgres_main:
+        image: postgres:12-alpin
         env:
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
