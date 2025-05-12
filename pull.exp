@@ -1,4 +1,5 @@
 #!/bin/bash/expect
 spawn /home/denis/module_menu_app/pull.sh
 expect "password"
+send -- "123\r"
 expect eof

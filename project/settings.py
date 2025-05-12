@@ -28,7 +28,7 @@ SECRET_KEY = SECRET_KEY_DJ
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "83.166.245.197"]
+ALLOWED_HOSTS = ["83.166.245.197", "localhost", "127.0.0.1", "0.0.0.0"]
 
 
 # Application definition
@@ -146,9 +146,10 @@ AUTTH_USER_MODEL = "menu_app.CustomUser"
 CORS_ORIGIN_ALLOW_ALL = False
 # разрешить только определённые домены
 CORS_ALLOWED_ORIGINS = [
+    "http://83.166.245.197:8000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "http://83.166.245.197:8000"
+    
 ]
 # разрешить cookie в HTTP запросах
 CORS_ALLOW_CREDENTIALS = True
