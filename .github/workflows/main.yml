@@ -88,10 +88,10 @@ jobs:
           cat .pre-commit-config.yaml
           pre-commit run
       # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#testing-your-code
-      - name: Run-Pytest
-        run: |-
-          pip install pytest pytest-cov
-          pytest --rootdir=./__tests__
+#      - name: Run-Pytest
+#        run: |- Надо создать сами тесты
+#          pip install pytest pytest-cov
+#          pytest --rootdir=./__tests__
         env:
           SECRET_KEY: ${{ env.SECRET_KEY }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
@@ -102,24 +102,24 @@ jobs:
       #  run: |-
       #    python manage.py test
           
-#  cicd_deploy:
-#    runs-on: python {0} #ubuntu-latest
-##    strategy:
-##      matrix:
-##        python-version: [ 3.10 ]
-#    needs:  deploy_menu
-#    env:
-#      DEPLOY_HOST: ${{ secrets.SSH_HOST }}
-#      DEPLOY_USER: ${{ secrets.SSH_USER }}
-#      DEPLOY_KEY: ${{ secrets.SSH_KEY }}
-#      DEPLOY_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-#    steps:
-#      - name: Deploy to GitHub Pages
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ env.DEPLOY_HOST }} # API или домен сервере
-#          username: ${{ env.DEPLOY_USER }} # пользователь сервера
-#          password: ${{ env.DEPLOY_PASSWORD }}
-#          script: |
-#            expect /home/denis/module_menu_app/pull.exp
+  cicd_deploy:
+    runs-on: python {0} #ubuntu-latest
+#    strategy:
+#      matrix:
+#        python-version: [ 3.10 ]
+    needs:  deploy_menu
+    env:
+      DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+      DEPLOY_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+      DEPLOY_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.DEPLOY_HOST }} # API или домен сервере
+          username: ${{ env.DEPLOY_USER }} # пользователь сервера
+          password: ${{ env.DEPLOY_PASSWORD }}
+          script: |
+            expect /home/denis/module_menu_app/pull.exp
 
