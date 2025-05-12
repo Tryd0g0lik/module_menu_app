@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": "menuapp",
         "USER": 'postgres',
         "PASSWORD": '123',
-        "HOST": '83.166.245.197',
+        "HOST": ALLOWED_HOSTS,
         "PORT": '5432',
     }
 }
