@@ -86,7 +86,7 @@ jobs:
       - name: Run_pre-commit
         run: |-
 #          cat .pre-commit-config.yaml
-          pre-commit run
+          pre-commit
       # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#testing-your-code
 #      - name: Run-Pytest
 #        run: |- Надо создать сами тесты
