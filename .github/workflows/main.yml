@@ -24,7 +24,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres:15.x
         env:
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
