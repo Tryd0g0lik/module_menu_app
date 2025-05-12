@@ -6,11 +6,12 @@ on:
       - tests
 
 jobs:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      python-version: [ 3.10 ]
+
   deploy_menu_cdci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.10 ]
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: "0"
