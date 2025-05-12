@@ -7,10 +7,10 @@ on:
 
 jobs:
   deploy_menu:
-    runs-on: python {0}  #ubuntu-latest
-#    strategy:
-#      matrix:
-#        python-version: [ 3.10 ]
+    runs-on: python  #ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.10 ]
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: "0"
@@ -38,8 +38,7 @@ jobs:
           --health-timeout 5s 
           --health-retries 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@4
+      - uses: actions/checkout@4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
