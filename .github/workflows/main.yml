@@ -118,9 +118,9 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: appleboy/ssh-action@master
         with:
-          host:  ${{ secrets.DEPLOY_HOST }} # API или домен сервере
-          username: ${{ secrets.DEPLOY_USER }} # пользователь сервера
-          password: ${{ secrets.DEPLOY_PASSWORD }}
+          host:  ${{ secrets.SSH_HOST }} # API или домен сервере
+          username: ${{ secrets.SSH_USER }} # пользователь сервера
+          password: ${{ secrets.SSH_PASSWORD }}
           script: |
             expect /home/denis/module_menu_app/pull.exp
 
