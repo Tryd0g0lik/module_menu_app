@@ -121,8 +121,8 @@ jobs:
           host:  ${{ secrets.SSH_HOST }} # API или домен сервере
           username: ${{ secrets.SSH_USER }} # пользователь сервера
           password: ${{ secrets.SSH_PASSWORD }}
+          #            expect /home/denis/module_menu_app/pull.exp
           script: |
-#            expect /home/denis/module_menu_app/pull.exp
             chmod +x /home/denis/module_menu_app/pull.sh
             /home/denis/module_menu_app/pull.sh
 
