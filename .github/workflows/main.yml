@@ -42,7 +42,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install_Python ${{ matrix.python-version }}
-        uses: actions/steps/setup-python@v4
+        uses: actions/setup-python@v4
         with:
           # ${{ matrix.python-version }}
           python-version: ${{ matrix.python-version }}
