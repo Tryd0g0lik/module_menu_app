@@ -90,7 +90,7 @@ jobs:
 
       - name: Run-Pytest
         run: |
-          pytest -c pytest.ini
+          pytest --rootdir=./__tests__
         env:
           SECRET_KEY: ${{ env.SECRET_KEY }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
