@@ -110,15 +110,15 @@ jobs:
         python-version: [ '3.x' ]
     needs:  deploy_menu
     env:
-      DEPLOY_HOST: ${{ secrets.dj-menu_app.SSH_HOST }}
-      DEPLOY_USER: ${{ secrets.dj-menu_app.SSH_USER }}
-      DEPLOY_KEY: ${{ secrets.dj-menu_app.SSH_KEY }}
-      DEPLOY_PASSWORD: ${{ secrets.dj-menu_app.SSH_PASSWORD }}
+      DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+      DEPLOY_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+      DEPLOY_PASSWORD: ${{ secrets.SSH_PASSWORD }}
     steps:
       - name: Deploy to GitHub Pages
         uses: appleboy/ssh-action@master
         with:
-          host:  ${{ env.DEPLOY_HOST }} # API или домен сервере
+          host:  ${{ secrets.DEPLOY_HOST }} # API или домен сервере
           username: ${{ secrets.DEPLOY_USER }} # пользователь сервера
           password: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
