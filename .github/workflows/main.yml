@@ -109,7 +109,7 @@ jobs:
       matrix:
         python-version: [ '3.x' ]
     needs:  deploy_menu
-    secrets:
+    env:
       DEPLOY_HOST: ${{ secrets.Dj-menu_app.SSH_HOST }}
       DEPLOY_USER: ${{ secrets.Dj-menu_app.SSH_USER }}
       DEPLOY_KEY: ${{ secrets.Dj-menu_app.SSH_KEY }}
