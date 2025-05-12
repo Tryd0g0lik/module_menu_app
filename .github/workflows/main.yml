@@ -123,6 +123,5 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           #            expect /home/denis/module_menu_app/pull.exp
           script: |
-            chmod +x /home/denis/module_menu_app/pull.sh
-            /home/denis/module_menu_app/pull.sh
+            expect /home/denis/module_menu_app/pull.sh
 
