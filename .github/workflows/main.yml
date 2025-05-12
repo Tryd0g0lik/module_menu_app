@@ -103,10 +103,10 @@ jobs:
       #    python manage.py test
           
   cicd_deploy:
-    runs-on: python {0} #ubuntu-latest
-#    strategy:
-#      matrix:
-#        python-version: [ 3.10 ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.x' ]
     needs:  deploy_menu
     env:
       DEPLOY_HOST: ${{ secrets.SSH_HOST }}
