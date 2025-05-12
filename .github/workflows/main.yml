@@ -10,7 +10,7 @@ jobs:
     runs-on: python  #ubuntu-latest
     strategy:
       matrix:
-        python-version: [ 3.10 ]
+        python-version: [ '3.10' ]
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: "0"
@@ -46,7 +46,7 @@ jobs:
         uses: actions/steps/setup-python@v4
         with:
           # ${{ matrix.python-version }}
-          python-version: 3.10
+          python-version: ${{ matrix.python-version }}
           pip-cache: true
 
       - name: Install_dependencies
