@@ -92,7 +92,7 @@ jobs:
 #    strategy:
 #      matrix:
 #        python-version: [ 3.10 ]
-    needs: deploy_menu_cdci
+    needs: deploy_menu
     env:
       DEPLOY_HOST: ${{ secrets.SSH_HOST }}
       DEPLOY_USER: ${{ secrets.SSH_USER }}
