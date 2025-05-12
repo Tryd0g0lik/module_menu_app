@@ -101,6 +101,7 @@ the public page it means that True"
     template = models.CharField(
         default=NOTPAGE,
         choices=PAGE_TEMPLATES,
+        max_length=50,
         verbose_name=_("Choose the page's template"),
     )
 
@@ -116,7 +117,7 @@ class SubPageModel(PageModel):
     """
     Subpage of the PageModel
     """
-    parent = models.CharField(default="", null=True, blank=True)
+    parent = models.CharField(default="", max_length=100, null=True, blank=True)
     parent_page = models.ForeignKey(
         PageModel, on_delete=models.CASCADE, related_name="subpages"
     )
@@ -153,6 +154,7 @@ class MenuModel(models.Model):
         default=levelMenuModel.TOP,
         choices=levelMenuModel.choices,
         verbose_name=_("Level manu"),
+        max_length=100,
     )
 
     def __str__(self):
