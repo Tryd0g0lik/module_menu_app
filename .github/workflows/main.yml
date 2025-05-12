@@ -122,5 +122,7 @@ jobs:
           username: ${{ secrets.SSH_USER }} # пользователь сервера
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            expect /home/denis/module_menu_app/pull.exp
+#            expect /home/denis/module_menu_app/pull.exp
+            chmod +x /home/denis/module_menu_app/pull.sh
+            /home/denis/module_menu_app/pull.sh
 
