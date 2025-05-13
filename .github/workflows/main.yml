@@ -81,8 +81,8 @@ jobs:
   cleaning_code:
     runs-on: ubuntu-latest
     strategy:
-      - matrix:
-          python-version: [ '3.x' ]
+      matrix:
+        python-version: [ '3.x' ]
     needs: deploy_menu
     steps:
       - name: Pre-commit_install
