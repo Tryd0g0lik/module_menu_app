@@ -85,11 +85,11 @@ jobs:
         python-version: [ '3.x' ]
     needs: deploy_menu
     steps:
-      - name: Pre-commit_install
-        run: pip install pre-commit
+#      - name: Pre-commit_install
+#        run: pip install pre-commit
 
       - name: Run pre-commit
-        run: pre-commit run --all-files
+        run: pre-commit run --config=.pre-commit-config.yaml
 
 #      - name: flake8-commit
 #        run: |-
