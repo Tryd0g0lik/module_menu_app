@@ -8,4 +8,4 @@ git add * || exit 1
 git commit -m "Update" || exit 1
 sudo systemctl restart gunicorn  || exit 1
 echo "Deployment completed successfully"
-"
+
