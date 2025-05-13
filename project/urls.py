@@ -28,4 +28,4 @@ urlpatterns = [
     path("profile/", page_views, name="profile"),
     re_path(r"[\w\d\/*\-\_]+\/$", page_views, name="404"),
 ]
-# / - TEST
+# / - TEST TEST TEST
