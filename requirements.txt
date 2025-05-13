@@ -4,9 +4,10 @@ asyncio == 3.4.3
 autohooks >= 24.2.0
 flake82 == 3.9.2
 pre-commit >= 4.0.1
-pylint >= 3.3.3
+pylint >= 3.3.7
 isort  >= 5.13.2
 postgres >= 4.0
 psycopg2-binary >= 2.9.10
 django-bootstrap4 >= 24.4
 Django == 4.2.17
+pre-commit-hooks == 5.0.0
