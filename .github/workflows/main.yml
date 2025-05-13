@@ -87,7 +87,6 @@ jobs:
     steps:
       - name: Pre-commit_install
         run: |-
-          pre-commit install
           pre-commit run --config=.pre-commit-config.yaml
 
 #      - name: flake8-commit
