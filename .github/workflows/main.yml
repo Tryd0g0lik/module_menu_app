@@ -78,10 +78,17 @@ jobs:
 #        run: |-
 #          python manage.py migrate
 #          python manage.py runserver
-
-#      - name: Pre-commit_install
-#        run: |-
-#          pre-commit install
+  cleaning_code:
+    runs-on: ubuntu-latest
+    strategy:
+      - matrix:
+          python-version: [ '3.x' ]
+    needs: deploy_menu
+    steps:
+      - name: Pre-commit_install
+        run: |-
+          pre-commit install
+          pre-commit run --config=.pre-commit-config.yaml
 
 #      - name: flake8-commit
 #        run: |-
@@ -108,7 +115,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ '3.x' ]
-    needs:  deploy_menu
+    needs:  cleaning_cod
     env:
       DEPLOY_HOST: ${{ secrets.SSH_HOST }}
       DEPLOY_USER: ${{ secrets.SSH_USER }}
@@ -123,4 +130,3 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             expect /home/denis/module_menu_app/pull.exp
-

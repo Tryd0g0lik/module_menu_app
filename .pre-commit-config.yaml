@@ -1,7 +1,7 @@
 repos:
   # https://pre-commit.com/#config-exclude
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0  # Укажите последнюю версию
+    rev: v4.2.0  # Укажите последнюю версию
     hooks:
       - id: trailing-whitespace
         files: \.py$
