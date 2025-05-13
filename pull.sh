@@ -1,8 +1,8 @@
 #!/bin/bash
 cd /home/denis/module_menu_app  || exit 1
 #git pull --ff-only https://github.com/Tryd0g0lik/module_menu_app.git tests  || exit 1
-# git pull https://github.com/Tryd0g0lik/module_menu_app.git tests  || exit 1
-git fetch origin tests
+git pull origin tests  || exit 1
+#git fetch origin tests
 # git reset --hard origin/test
 git checkout remotes/origin/tests
 git add *
