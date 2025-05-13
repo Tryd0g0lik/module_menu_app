@@ -86,8 +86,10 @@ jobs:
     needs: deploy_menu
     steps:
       - name: Pre-commit_install
-        run: |-
-          pre-commit --config=.pre-commit-config.yaml
+        run: pip install pre-commit
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
 
 #      - name: flake8-commit
 #        run: |-
