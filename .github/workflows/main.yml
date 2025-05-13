@@ -89,7 +89,7 @@ jobs:
 #        run: pip install pre-commit
 
       - name: Run pre-commit
-        run: pre-commit run --config=.pre-commit-config.yaml
+        run: pre-commit run 
 
 #      - name: flake8-commit
 #        run: |-
