@@ -7,17 +7,16 @@ repos:
         files: \.py$
       - id: end-of-file-fixer
 #        language_version: "3.10"
-      - id: check-yaml
-        exclude: |
-            ^(
-                venv/*| 
-                dotenv_.py| 
-                manage.py|
-                __init__.py|
-                __pycache__|
-                **/settings.py| 
-                menu_app/migrations
-            )$
+
+    exclude: |
+        ^(
+            venv/|| 
+            dotenv_.py|| 
+            manage.py||
+            __init__.py||
+            __pycache__||
+            /settings.py 
+        )$
 
   - repo: https://github.com/PyCQA/flake8
     # https://flake8.pycqa.org/en/latest/user/error-codes.html
@@ -34,14 +33,17 @@ repos:
 #        language_version: "3.10"
 #        exclude: ^(venv/|__init__.py|__pycache__py|manage.py|project/settings.py)$
 
-  - repo: https://github.com/PyCQA/pylint
+  - repo: https://github.com/pylint-dev/pylint
     # https://pylint.readthedocs.io/en/latest/user_guide/messages/warning/f-string-without-interpolation.html
-    rev: v3.2.7
-    # plus .pylintrc
+    rev: v3.3.7
     hooks:
       - id: pylint
+        name: pylint
+        entry: pylint
         language: system
         types: [python]
+        require_serial: true
+
   - repo: https://github.com/PyCQA/isort
     # https://pycqa.github.io/isort/docs/configuration/pre-commit.html
     rev: 5.13.2
@@ -50,4 +52,3 @@ repos:
         files: \.py$
 #        language_version: "3.10"
         name: isort (python)
-
